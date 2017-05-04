@@ -121,8 +121,9 @@ shinyVisUI <- function()
               p(
                 "A Shiny web application for ddPCR analysis. It is part of
                 the ",
-                a(href="https://github.com/CRUKMI-ComputationalBiology/twoddpcr", "twoddpcr"),
-                "package."
+                a(href="https://bioconductor.org/packages/twoddpcr/", 
+                  "twoddpcr"),
+                "Bioconductor package."
               ),
               h4("General Usage"),
               helpText(
@@ -250,12 +251,19 @@ shinyVisUI <- function()
                 helpText(
                   "Choose a 'Classification Mode'. ",
                   tags$ul(
-                    tags$li("'K-means' works well in most cases."),
+                    tags$li("'K-means Clustering' works well in most cases."),
                     tags$li("'Thresholds' works well if the clusters ",
                                    "are well-separated.")
                   ),
-                  "Use 'Normalise data' to minimise variations between ",
-                  "clusters in different wells."
+                  "See the",
+                  a(href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#analysis-of-the-data", 
+                    "Bioconductor vignette", target="_blank"
+                  ),
+                  "for a discussion comparing these two approaches.",
+                  p(
+                    "Use 'Normalise data' to minimise variations between 
+                    clusters in different wells."
+                  )
                 )
               ),
               conditionalPanel(
@@ -667,9 +675,15 @@ shinyVisUI <- function()
             ),
             h4("Classify"),
             p(
-              "This tab is used for the gating of the droplets. 'K-means
-              Clustering' should work without any modifications if the data
-              forms four clear clusters; just click 'Run Classification'."
+              "This tab is used for the gating of the droplets. The 'K-means 
+              Clustering' and 'Thresholds' approaches are discussed in the ",
+              a(href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#analysis-of-the-data", 
+                "Bioconductor vignette.",
+                target="_blank"
+              ),
+              "In general, 'K-means Clustering' should work without any 
+              modifications if the data forms four clear clusters; just click 
+              'Run Classification'."
             ),
             p(
               "If the clusters are well separated, 'Thresholds' should work
