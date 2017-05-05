@@ -121,9 +121,16 @@ shinyVisUI <- function()
               p(
                 "A Shiny web application for ddPCR analysis. It is part of
                 the ",
-                a(href="https://bioconductor.org/packages/twoddpcr/", 
-                  "twoddpcr"),
-                "Bioconductor package."
+                a(
+                  href="https://bioconductor.org/packages/twoddpcr/", 
+                  "twoddpcr"
+                ),
+                "Bioconductor package. If you use this package, please ",
+                a(
+                  href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#citing-twoddpcr", 
+                  "cite it.",
+                  target="_blank"
+                )
               ),
               h4("General Usage"),
               helpText(
@@ -601,8 +608,16 @@ shinyVisUI <- function()
             p(
               "A Shiny web application for ddPCR analysis. It is part of
               the ",
-              a(href="https://github.com/CRUKMI-ComputationalBiology/twoddpcr",
-                "twoddpcr"), "package."
+              a(
+                href="https://bioconductor.org/packages/twoddpcr/", 
+                "twoddpcr"
+              ),
+              "Bioconductor package. If you use this package, please ",
+              a(
+                href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#citing-twoddpcr", 
+                "cite it.",
+                target="_blank"
+              )
             ),
             p(
               "The package and this Shiny app are maintained by Anthony

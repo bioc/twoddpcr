@@ -605,7 +605,8 @@ columns should fix the problem.
 
 # Citing `twoddpcr`
 
-If you use the `twoddpcr` package in your work, please cite it:
+If you use the `twoddpcr` package in your work, please cite the [Bioinformatics 
+paper](http://dx.doi.org/10.1093/bioinformatics/btx308):
 
 ```{r}
 citation("twoddpcr")
