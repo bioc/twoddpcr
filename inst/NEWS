@@ -1,3 +1,10 @@
+twoddpcr v1.0.3 (Release date: 2017-05-26)
+============
+
+Bug fixes:
+* Ensure that the Rmd template is copied for report generation in the Shiny 
+  app.
+
 twoddpcr v1.0.2 (Release date: 2017-05-05)
 ============
 
