@@ -999,7 +999,8 @@ shinyVisServer <- function(input, output, session)
     {
       # Copy the report file to a temporary directory before processing it.
       tempReport <- file.path(normalizePath(tempdir()), "report-html.Rmd")
-      file.copy("inst/rmd/report-html.Rmd", tempReport, overwrite=TRUE)
+      rmdLoc <- system.file("rmd", "report-html.Rmd", package = "twoddpcr")
+      file.copy(rmdLoc, tempReport, overwrite=TRUE)
 
       # Check the rain type of the current mode.
       if(length(grep("MahRain", results$mode)) > 0)
@@ -1010,7 +1011,6 @@ shinyVisServer <- function(input, output, session)
         rainType <- "None"
       
       # Set up parameters to pass to the Rmd document.
-      print(longMode(results$baseMode))
       params <- list(plateName=wells$plateName,
                      plate=results$all,
                      cMethod=results$mode,

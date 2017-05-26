@@ -128,7 +128,7 @@ It can also be accessed at
 [http://shiny.cruk.manchester.ac.uk/twoddpcr/](http://shiny.cruk.manchester.ac.uk/twoddpcr/).
 
 If you wish to run the app from your own server, instructions are given in the 
-[vignette](vignettes/twoddpcr.Rmd).
+[vignette](https://bioconductor.org/packages/devel/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#shiny-based-gui-for-non-r-users).
 
 
 # Citing `twoddpcr`
