@@ -1,3 +1,10 @@
+twoddpcr v1.0.4 (Release date: 2017-05-30)
+============
+
+Bug fixes:
+* Fix Issue #1: Loading a QuantaSoft classification no longer looks for a 
+  column named "Cluster".
+
 twoddpcr v1.0.3 (Release date: 2017-05-26)
 ============
 
