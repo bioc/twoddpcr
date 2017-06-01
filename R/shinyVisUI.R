@@ -76,6 +76,9 @@ shinyVisUI <- function()
           div.checkbox {
             margin-top: 0px;
           }
+          .shiny-output-error-validation {
+            color: #D8006B;
+          }
           "
         )
       ) 
@@ -95,7 +98,7 @@ shinyVisUI <- function()
                 multiple=TRUE
               )
             ),
-            actionButton("useThisDataset", "Use This Dataset"),
+            uiOutput("useThisDatasetPH"),
             div(style="margin-top: 2ex",
               strong("Help"),
               helpText(
@@ -123,13 +126,12 @@ shinyVisUI <- function()
                 the ",
                 a(
                   href="https://bioconductor.org/packages/twoddpcr/", 
-                  "twoddpcr"
+                  "twoddpcr", target="_blank"
                 ),
                 "Bioconductor package. If you use this package, please ",
                 a(
                   href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#citing-twoddpcr", 
-                  "cite it.",
-                  target="_blank"
+                  "cite it.", target="_blank"
                 )
               ),
               h4("General Usage"),
@@ -610,13 +612,12 @@ shinyVisUI <- function()
               the ",
               a(
                 href="https://bioconductor.org/packages/twoddpcr/", 
-                "twoddpcr"
+                "twoddpcr", target="_blank"
               ),
               "Bioconductor package. If you use this package, please ",
               a(
                 href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#citing-twoddpcr", 
-                "cite it.",
-                target="_blank"
+                "cite it.", target="_blank"
               )
             ),
             p(
@@ -626,11 +627,11 @@ shinyVisUI <- function()
               Ged Brady (",
               a(href="http://www.cruk.manchester.ac.uk/Research/CRUK-MI-Groups/CEP/Home",
                 "Clinical and Experimental Pharmacology Group, Cancer
-                Research UK Manchester Institute"),
+                Research UK Manchester Institute", target="_blank"),
               ") and Crispin J. Miller (",
               a(href="http://www.cruk.manchester.ac.uk/Research/CRUK-MI-Groups/RNA-Biology-Computational-Biology/Home",
                 "RNA Biology Group, Cancer Research UK Manchester
-                Institute"),
+                Institute", target="_blank"),
               ")."
             ),
             h4("General Usage"),
@@ -650,9 +651,14 @@ shinyVisUI <- function()
             p("Select the dataset to use. This can be:"),
             tags$ul(
               tags$li(
-                "Loaded from CSV files. These can be exported from
-                Bio-Rad's QuantaSoft software. Note that empty wells will be
-                ignored."
+                "Loaded from droplet amplitude CSV files. These can be
+                exported from Bio-Rad's QuantaSoft software but must be two
+                channel data; further instructions can be found in the ",
+                a(
+                  href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#exporting-droplet-amplitudes-from-quantasoft-to-csv-files",
+                  "twoddpcr package vignette.", target="_blank"
+                ),
+                "Note that empty wells will be ignored."
               ),
               tags$li(
                 "The sample KRAS dataset can be used as a toy example."
@@ -693,8 +699,7 @@ shinyVisUI <- function()
               "This tab is used for the gating of the droplets. The 'K-means 
               Clustering' and 'Thresholds' approaches are discussed in the ",
               a(href="https://bioconductor.org/packages/release/bioc/vignettes/twoddpcr/inst/doc/twoddpcr.html#analysis-of-the-data", 
-                "Bioconductor vignette.",
-                target="_blank"
+                "Bioconductor vignette.", target="_blank"
               ),
               "In general, 'K-means Clustering' should work without any 
               modifications if the data forms four clear clusters; just click 

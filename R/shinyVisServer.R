@@ -20,7 +20,8 @@ shinyVisServer <- function(input, output, session)
 {
   # Error messages.
   messages <- reactiveValues(
-    error="No ddPCR droplet amplitude data loaded."
+    error="No ddPCR droplet amplitude data loaded.",
+    uploadError=""
   )
   
   # Variables to store the base set of samples, the current selection, and 
@@ -264,7 +265,8 @@ shinyVisServer <- function(input, output, session)
   
   # Check whether upload was successful.
   output$uploadSuccess <- reactive({
-    return(length(input$inFile$name) > 0 && length(wells$all) > 0)
+    return(messages$error == "" &&
+           length(input$inFile$name) > 0 && length(wells$all) > 0)
   })
   outputOptions(output, "uploadSuccess", suspendWhenHidden=FALSE)
   
@@ -279,6 +281,34 @@ shinyVisServer <- function(input, output, session)
     return(!is.null(wells$selected) && !isEmpty(wells$selected))
   })
   outputOptions(output, "wellSelectionSuccess", suspendWhenHidden=FALSE)
+  
+  # Show the "Use This Dataset" action button only if droplet amplitude CSVs 
+  # have been uploaded.
+  output$useThisDatasetPH <- renderUI({
+    validate(
+      need(input$datasetType == "Sample KRAS" ||
+           (messages$uploadError == "" && length(input$inFile$name) > 0 &&
+            length(wells$loadedAll) > 0),
+           {
+             if(messages$uploadError != "")
+               msg <- paste0("CSV file upload failed: ",
+                             sub("\\s+$", "", messages$uploadError), " ")
+             else
+               msg <- ""
+             
+             msg <- paste0(msg, "Please upload two channel droplet amplitude ",
+                           "CSV files")
+             
+             if(messages$uploadError != "")
+               msg <- paste0(msg, ". ")
+             else
+               msg <- paste0(msg, " or use the 'Sample KRAS' dataset. ")
+             
+             msg <- paste0(msg, "For details, see the 'Help' tab.")
+           })
+    )
+    actionButton("useThisDataset", "Use This Dataset")
+  })
   
   # Import CSV files and update all of the variables.
   loadFromFile <- function()
@@ -298,7 +328,21 @@ shinyVisServer <- function(input, output, session)
       names(wells$loadedPlateName) <- NULL
     }
     
-    wells$loadedAll <- ddpcrPlate(wells=d)
+    tryCatch({
+      wells$loadedAll <- ddpcrPlate(wells=d)
+      messages$uploadError <- ""
+    },
+    warning=function(e)
+    {
+      wells$loadedAll <- ddpcrPlate()
+      messages$uploadError <- "invalid CSV file format."
+    },
+    error=function(e)
+    {
+      wells$loadedAll <- ddpcrPlate()
+      messages$uploadError <- "invalid CSV file format."
+    })
+    
   }
   
   # Get the droplet data for each well in the selected dataset.
