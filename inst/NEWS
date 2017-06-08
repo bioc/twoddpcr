@@ -1,3 +1,10 @@
+twoddpcr v1.0.6 (Release date: 2017-06-08)
+============
+
+Bug fixes:
+* Fix Issue #1 further: Catch all errors from uploading droplet amplitude CSVs.
+
+
 twoddpcr v1.0.5 (Release date: 2017-06-01)
 ============
 

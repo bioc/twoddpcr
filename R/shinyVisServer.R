@@ -313,22 +313,22 @@ shinyVisServer <- function(input, output, session)
   # Import CSV files and update all of the variables.
   loadFromFile <- function()
   {
-    # User uploads CSV files.
-    if(is.null(input$inFile))
-      d <- list()
-    else
-    {
-      d <- lapply(input$inFile$datapath, utils::read.csv)
-      nonemptyWells <- (vapply(d, nrow, numeric(1)) != 0)  # Remove empty wells.
-      d <- d[nonemptyWells]
-      names(d) <- extractWellNames(input$inFile$name)[nonemptyWells]
-      
-      # Load the plate name.
-      wells$loadedPlateName <- extractPlateName(input$inFile$name[1])
-      names(wells$loadedPlateName) <- NULL
-    }
-    
     tryCatch({
+      # User uploads CSV files.
+      if(is.null(input$inFile))
+        d <- list()
+      else
+      {
+        d <- lapply(input$inFile$datapath, utils::read.csv)
+        nonemptyWells <- (vapply(d, nrow, numeric(1)) != 0)  # Remove empty wells.
+        d <- d[nonemptyWells]
+        names(d) <- extractWellNames(input$inFile$name)[nonemptyWells]
+        
+        # Load the plate name.
+        wells$loadedPlateName <- extractPlateName(input$inFile$name[1])
+        names(wells$loadedPlateName) <- NULL
+      }
+    
       wells$loadedAll <- ddpcrPlate(wells=d)
       messages$uploadError <- ""
     },
