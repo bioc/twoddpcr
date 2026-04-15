@@ -13,6 +13,7 @@ trCl <- gridClassify(trAm,
                      fullTable=FALSE)
 
 test_that("k-NN still works when the test set has fewer clusters", {
+  set.seed(42)
   testWell <- ddpcrWell(file.path(testDir, "sample_A04_Amplitude.csv"))
   testWell <- knnClassify(testWell, trAm, trCl, k=1)
   knc <- wellClassification(testWell, "knn")
@@ -20,6 +21,7 @@ test_that("k-NN still works when the test set has fewer clusters", {
 })
 
 test_that("k-NN works for a ddpcrPlate", {
+  set.seed(42)
   testPlate <- ddpcrPlate(testDir)
   testPlate <- knnClassify(testPlate, trAm, trCl, k=1)
   knc <- unlist(plateClassification(testPlate, "knn"))
@@ -27,6 +29,7 @@ test_that("k-NN works for a ddpcrPlate", {
 })
 
 test_that("k-NN works for a ddpcrPlate", {
+  set.seed(42)
   testPlate <- ddpcrPlate(testDir)
   testPlate <- knnClassify(testPlate, trAm, trCl, k=3)
   knc <- unlist(plateClassification(testPlate, "knn"))
